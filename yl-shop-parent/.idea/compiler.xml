@@ -6,6 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="yl-shop-common-core" />
+        <module name="yl-shop-service-api-xxx" />
+        <module name="yl-shop-service-xxx" />
         <module name="yl-shop-basic-eureka-server" />
       </profile>
     </annotationProcessing>
@@ -15,8 +18,11 @@
       <module name="yl-shop-basic-eureka-server" options="-parameters" />
       <module name="yl-shop-basics" options="-parameters" />
       <module name="yl-shop-commoms" options="-parameters" />
+      <module name="yl-shop-common-core" options="-parameters" />
       <module name="yl-shop-service" options="-parameters" />
       <module name="yl-shop-service-api" options="-parameters" />
+      <module name="yl-shop-service-api-xxx" options="-parameters" />
+      <module name="yl-shop-service-xxx" options="-parameters" />
     </option>
   </component>
 </project>

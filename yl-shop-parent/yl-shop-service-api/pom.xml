@@ -13,6 +13,9 @@
 
     <!--父级项目不需要打包所有packging的类型为pom-->
     <packaging>pom</packaging>
+    <modules>
+        <module>yl-shop-service-api-xxx</module>
+    </modules>
 
     <dependencies>
 
@@ -20,6 +23,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--Entity 中的@Table 和@Id需要次注解-->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <!--引入common工程代码-->
+        <dependency>
+            <groupId>com.baidu</groupId>
+            <artifactId>yl-shop-common-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
