@@ -16,6 +16,7 @@
     <modules>
         <module>yl-shop-basic-eureka-server</module>
         <module>yl-shop-basic-zuul-serer</module>
+        <module>yl-shop-basic-zuul-server</module>
     </modules>
 
 </project>

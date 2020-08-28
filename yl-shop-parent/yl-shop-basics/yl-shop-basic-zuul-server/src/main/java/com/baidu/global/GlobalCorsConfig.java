@@ -1,6 +1,7 @@
 package com.baidu.global;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -9,9 +10,10 @@ import org.springframework.web.filter.CorsFilter;
  * @ClassName GlobalCorsConfig
  * @Description: TODO
  * @Author yuanli
- * @Date 2020/8/27
+ * @Date 2020/8/28
  * @Version V1.0
  **/
+@Configuration
 public class GlobalCorsConfig {
     @Bean
     public CorsFilter corsFilter() {
