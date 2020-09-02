@@ -72,7 +72,47 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
 
         brandMapper.insertSelective(brandEntity);
 
-        if(brandDTO.getCategory().contains(",")){
+        this.insertCategoryAndBrand(brandDTO,brandEntity);
+
+        return this.setResultSuccess();
+
+    }
+
+    @Transactional
+    @Override
+    public Result<JsonObject> editBrand(BrandDTO brandDTO) {
+        BrandEntity brandEntity = BaiduBeanUtil.copyProperties(brandDTO, BrandEntity.class);
+        brandEntity.setLetter(PinyinUtil.getUpperCase(String.valueOf(brandEntity.getName().charAt(0))
+                , PinyinUtil.TO_FIRST_CHAR_PINYIN).charAt(0));
+
+        brandMapper.updateByPrimaryKeySelective(brandEntity);
+
+        this.deleteCategoryAndBrand(brandEntity.getId());
+
+        this.insertCategoryAndBrand(brandDTO,brandEntity);
+
+        return this.setResultSuccess();
+    }
+
+    @Transactional
+    @Override
+    public Result<JsonObject> deleteBrand(Integer id) {
+        brandMapper.deleteByPrimaryKey(id);
+        this.deleteCategoryAndBrand(id);
+
+        return this.setResultSuccess();
+    }
+
+    private void deleteCategoryAndBrand(Integer id){
+
+        Example example = new Example(CategoryBrandEntity.class);
+        example.createCriteria().andEqualTo("brandId",id);
+        categoryBrandMapper.deleteByExample(example);
+    }
+
+    private void insertCategoryAndBrand(BrandDTO brandDTO,BrandEntity brandEntity) {
+
+        if (brandDTO.getCategory().contains(",")) {
 
             List<CategoryBrandEntity> categoryBrandEntities = Arrays.asList(brandDTO.getCategory().split(","))
                     .stream().map(cid -> {
@@ -84,19 +124,14 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
                         return entity;
                     }).collect(Collectors.toList());
 
-            //批量新增
             categoryBrandMapper.insertList(categoryBrandEntities);
-        }else{
-            //新增
-            CategoryBrandEntity entity = new CategoryBrandEntity();
+        } else {
 
+            CategoryBrandEntity entity = new CategoryBrandEntity();
             entity.setCategoryId(StringUtil.toInteger(brandDTO.getCategory()));
             entity.setBrandId(brandEntity.getId());
 
             categoryBrandMapper.insertSelective(entity);
         }
-
-        return this.setResultSuccess();
-
     }
 }

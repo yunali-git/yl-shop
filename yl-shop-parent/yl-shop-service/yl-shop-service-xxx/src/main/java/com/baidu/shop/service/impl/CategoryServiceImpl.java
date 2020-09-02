@@ -93,4 +93,11 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
         categoryMapper.deleteByPrimaryKey(id);//删除
         return this.setResultSuccess();
     }
+
+    @Override
+    public Result<List<CategoryEntity>> getBrand(Integer brandId) {
+            List<CategoryEntity> byBrandId = categoryMapper.getBrandId(brandId);
+
+            return this.setResultSuccess(byBrandId);
+    }
 }
