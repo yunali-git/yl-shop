@@ -1,0 +1,17 @@
+server:
+  port: 8200
+spring:
+  application:
+    name: upload-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+mingrui:
+  upload:
+    path:
+      windows: D:\\YL\\images
+      linux: /yuanli/images
+    img:
+      host: http://image.mrshop.com

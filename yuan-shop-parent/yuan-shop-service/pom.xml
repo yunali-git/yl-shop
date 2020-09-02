@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>yl-shop-parent</artifactId>
+        <artifactId>yuan-shop-parent</artifactId>
         <groupId>com.baidu</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>yl-shop-service-api</artifactId>
+    <artifactId>yuan-shop-service</artifactId>
 
     <!--父级项目不需要打包所有packging的类型为pom-->
     <packaging>pom</packaging>
     <modules>
-        <module>yl-shop-service-api-xxx</module>
+        <module>yuan-shop-service-xxx</module>
     </modules>
 
     <dependencies>
@@ -25,37 +25,35 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--Entity 中的@Table 和@Id需要次注解-->
+        <!-- springcloud feign组件 -->
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <!--引入common工程代码-->
-        <dependency>
-            <groupId>com.baidu</groupId>
-            <artifactId>yl-shop-common-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-        <!--帮助开发人员快速生成API文档-->
+        <!--mysql数据库连接-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope><!--项目运行阶段使用-->
         </dependency>
-        <!--提供可视化的API文档-->
+        <!--通用mapper-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>2.1.5</version>
         </dependency>
-
         <!--分页工具-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baidu</groupId>
+            <artifactId>yuan-shop-service-api-xxx</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

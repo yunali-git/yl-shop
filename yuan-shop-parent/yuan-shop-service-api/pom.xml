@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>yl-shop-parent</artifactId>
+        <artifactId>yuan-shop-parent</artifactId>
         <groupId>com.baidu</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>yl-shop-service-api</artifactId>
+    <artifactId>yuan-shop-service-api</artifactId>
 
     <!--父级项目不需要打包所有packging的类型为pom-->
     <packaging>pom</packaging>
     <modules>
-        <module>yl-shop-service-api-xxx</module>
+        <module>yuan-shop-service-api-xxx</module>
     </modules>
 
     <dependencies>
@@ -34,28 +34,8 @@
         <!--引入common工程代码-->
         <dependency>
             <groupId>com.baidu</groupId>
-            <artifactId>yl-shop-common-core</artifactId>
+            <artifactId>yuan-shop-commoms-core</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <!--帮助开发人员快速生成API文档-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <!--提供可视化的API文档-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-
-        <!--分页工具-->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.2.10</version>
         </dependency>
 
     </dependencies>
