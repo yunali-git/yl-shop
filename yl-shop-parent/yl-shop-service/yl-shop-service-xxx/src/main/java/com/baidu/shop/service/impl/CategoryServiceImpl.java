@@ -3,11 +3,16 @@ package com.baidu.shop.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baidu.shop.base.BaseApiService;
 import com.baidu.shop.base.Result;
+import com.baidu.shop.entity.BrandEntity;
+import com.baidu.shop.entity.CategoryBrandEntity;
 import com.baidu.shop.entity.CategoryEntity;
+import com.baidu.shop.entity.SpecGroupEntity;
+import com.baidu.shop.mapper.BrandMapper;
+import com.baidu.shop.mapper.CategoryBrandMapper;
 import com.baidu.shop.mapper.CategoryMapper;
+import com.baidu.shop.mapper.SpecGroupMapper;
 import com.baidu.shop.service.CategoryService;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
@@ -26,6 +31,12 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
 
     @Resource
     private CategoryMapper categoryMapper;
+
+    @Resource
+    private SpecGroupMapper specGroupMapper;
+
+    @Resource
+    private CategoryBrandMapper categoryBrandMapper;
 
 
     @Override
@@ -71,12 +82,10 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
         if (categoryEntity == null) {
             return this.setResultError("当前id不存在");
         }
-
         //判断当前id是否是父节点
 //        if(categoryEntity.getIsParent() == 1){
 //            return this.setResultError("当前数据为父节点,不可以删除");
 //        }
-
         //构建条件查询 根据 被删除的parentId查询数据
         Example example = new Example(CategoryEntity.class);
         example.createCriteria().andEqualTo("parentId",categoryEntity.getParentId());
@@ -89,6 +98,18 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
             parentEntity.setIsParent(0);
             categoryMapper.updateByPrimaryKeySelective(parentEntity);
         }
+
+        //分类绑定规格
+        Example example1 = new Example(SpecGroupEntity.class);
+        example1.createCriteria().andEqualTo("cid",id);
+        List<SpecGroupEntity> list1 = specGroupMapper.selectByExample(example1);
+        if(list1.size() >0) return this.setResultError("此分类已被规格绑定,不可删除");
+
+        //分类绑定品牌
+        Example example2 = new Example(CategoryBrandEntity.class);
+        example2.createCriteria().andEqualTo("categoryId",id);
+        List<CategoryBrandEntity> list2 = categoryBrandMapper.selectByExample(example2);
+        if(list2.size() > 0) return this.setResultError("此分类已被品牌绑定,不可删除");
 
         categoryMapper.deleteByPrimaryKey(id);//删除
         return this.setResultSuccess();
