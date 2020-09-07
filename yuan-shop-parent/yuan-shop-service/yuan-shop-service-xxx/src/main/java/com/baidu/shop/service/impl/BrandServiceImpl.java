@@ -1,5 +1,6 @@
 package com.baidu.shop.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baidu.shop.base.BaseApiService;
 import com.baidu.shop.base.Result;
 import com.baidu.shop.dto.BrandDTO;
@@ -9,7 +10,6 @@ import com.baidu.shop.mapper.BrandMapper;
 import com.baidu.shop.mapper.CategoryBrandMapper;
 import com.baidu.shop.service.BrandService;
 import com.baidu.shop.utils.BaiduBeanUtil;
-import com.baidu.shop.utils.ObjectUtil;
 import com.baidu.shop.utils.PinyinUtil;
 import com.baidu.shop.utils.StringUtil;
 import com.baidu.shop.validate.group.MingruiOperation;
@@ -17,6 +17,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.JsonObject;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
@@ -31,12 +32,11 @@ import java.util.stream.Collectors;
  * @ClassName BrandServiceImpl
  * @Description: TODO
  * @Author yuanli
- * @Date 2020/8/31
+ * @Date 2020/9/2
  * @Version V1.0
  **/
 @RestController
 public class BrandServiceImpl extends BaseApiService implements BrandService {
-
     @Resource
     private BrandMapper brandMapper;
 
@@ -45,34 +45,27 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
 
     @Override
     public Result<PageInfo<BrandEntity>> getBrandInfo(BrandDTO brandDTO) {
-
         //分页
-        //PageHelper.startPage(brandDTO.getPage(),brandDTO.getRows());
-        if(ObjectUtil.isNotNull(brandDTO.getPage())
-                && ObjectUtil.isNotNull(brandDTO.getRows()))
-            PageHelper.startPage(brandDTO.getPage(),brandDTO.getRows());
+        PageHelper.startPage(brandDTO.getPage(),brandDTO.getRows());
 
         //排序
         Example example = new Example(BrandEntity.class);
         if(StringUtil.isNotEmpty(brandDTO.getSort())) example.setOrderByClause(brandDTO.getOrderByClause());
 
-        Example.Criteria criteria = example.createCriteria();
-        if(ObjectUtil.isNotNull(brandDTO.getId()))
-            criteria.andEqualTo("id",brandDTO.getId());
-
-        //条件查询
-        if (StringUtil.isNotEmpty(brandDTO.getName())) example.createCriteria()
-                .andLike("name","%" + brandDTO.getName() + "%");
-
+        if(!StringUtils.isEmpty(brandDTO.getName())){
+            example.createCriteria().andLike("name","%" + brandDTO.getName() + "%");
+        }
         //查询
         List<BrandEntity> list = brandMapper.selectByExample(example);
+
         PageInfo<BrandEntity> pageInfo = new PageInfo<>(list);
+
         return this.setResultSuccess(pageInfo);
     }
 
     @Transactional
     @Override
-    public Result<JsonObject> saveBrand(BrandDTO brandDTO) {
+    public Result<JSONObject> save(BrandDTO brandDTO) {
         BrandEntity brandEntity = BaiduBeanUtil.copyProperties(brandDTO, BrandEntity.class);
 
         brandEntity.setLetter(PinyinUtil.getUpperCase(String.valueOf(brandEntity.getName().charAt(0))
@@ -83,33 +76,8 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
         this.insertCategoryAndBrand(brandDTO,brandEntity);
 
         return this.setResultSuccess();
-
     }
 
-    @Transactional
-    @Override
-    public Result<JsonObject> editBrand(BrandDTO brandDTO) {
-        BrandEntity brandEntity = BaiduBeanUtil.copyProperties(brandDTO, BrandEntity.class);
-        brandEntity.setLetter(PinyinUtil.getUpperCase(String.valueOf(brandEntity.getName().charAt(0))
-                , PinyinUtil.TO_FIRST_CHAR_PINYIN).charAt(0));
-
-        brandMapper.updateByPrimaryKeySelective(brandEntity);
-
-        this.deleteCategoryAndBrand(brandEntity.getId());
-
-        this.insertCategoryAndBrand(brandDTO,brandEntity);
-
-        return this.setResultSuccess();
-    }
-
-    @Transactional
-    @Override
-    public Result<JsonObject> deleteBrand(Integer id) {
-        brandMapper.deleteByPrimaryKey(id);
-        this.deleteCategoryAndBrand(id);
-
-        return this.setResultSuccess();
-    }
 
     private void deleteCategoryAndBrand(Integer id){
 
@@ -142,4 +110,5 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
             categoryBrandMapper.insertSelective(entity);
         }
     }
+
 }

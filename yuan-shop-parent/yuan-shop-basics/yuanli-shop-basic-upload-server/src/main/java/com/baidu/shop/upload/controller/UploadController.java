@@ -15,12 +15,12 @@ import java.util.UUID;
  * @ClassName UploadController
  * @Description: TODO
  * @Author yuanli
- * @Date 2020/9/1
+ * @Date 2020/9/2
  * @Version V1.0
  **/
 @RestController
-@RequestMapping(value = "/uploadImg")
-public class UploadController extends BaseApiService{
+@RequestMapping(value = "upload")
+public class UploadController extends BaseApiService {
     //linux系统的上传目录
     @Value(value = "${mingrui.upload.path.windows}")
     private String windowsPath;
@@ -40,7 +40,7 @@ public class UploadController extends BaseApiService{
 
         String filename = file.getOriginalFilename();//获取文件名
 
-        String path = "";//文件上传的路径
+        String path = "";
         String os = System.getProperty("os.name").toLowerCase();
         if(os.indexOf("win") != -1){
             path = windowsPath;

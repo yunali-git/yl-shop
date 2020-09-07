@@ -15,6 +15,11 @@ zuul:
       serviceId: xxx-service
   # 启用重试
   retryable: true
+  # 包含此路径的不进行路由
+  ignored-patterns: /upload/**
+  # 忽略上传服务
+  ignored-services:
+    -upload-server
 #配置负载
 ribbon:
   ConnectTimeout: 250 # 连接超时时间(ms)

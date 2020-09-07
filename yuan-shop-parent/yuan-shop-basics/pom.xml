@@ -16,6 +16,7 @@
     <modules>
         <module>yuan-shop-eureka-server</module>
         <module>yuan-shop-basic-zuul-server</module>
+        <module>yuanli-shop-basic-upload-server</module>
     </modules>
 
 </project>
