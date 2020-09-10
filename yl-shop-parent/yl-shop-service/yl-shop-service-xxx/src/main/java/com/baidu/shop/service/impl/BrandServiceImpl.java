@@ -5,8 +5,12 @@ import com.baidu.shop.base.Result;
 import com.baidu.shop.dto.BrandDTO;
 import com.baidu.shop.entity.BrandEntity;
 import com.baidu.shop.entity.CategoryBrandEntity;
+import com.baidu.shop.entity.SkuEntity;
+import com.baidu.shop.entity.SpuEntity;
 import com.baidu.shop.mapper.BrandMapper;
 import com.baidu.shop.mapper.CategoryBrandMapper;
+import com.baidu.shop.mapper.SkuMapper;
+import com.baidu.shop.mapper.SpuMapper;
 import com.baidu.shop.service.BrandService;
 import com.baidu.shop.utils.BaiduBeanUtil;
 import com.baidu.shop.utils.ObjectUtil;
@@ -43,6 +47,17 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
     @Resource
     private CategoryBrandMapper categoryBrandMapper;
 
+    @Resource
+    private SpuMapper spuMapper;
+
+    @Override
+    public Result<List<BrandEntity>> getBrandByCategory(Integer cid) {
+        
+        List<BrandEntity> list = brandMapper.getBrandByCategory(cid);
+
+        return this.setResultSuccess(list);
+    }
+
     @Override
     public Result<PageInfo<BrandEntity>> getBrandInfo(BrandDTO brandDTO) {
 
@@ -61,8 +76,7 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
             criteria.andEqualTo("id",brandDTO.getId());
 
         //条件查询
-        if (StringUtil.isNotEmpty(brandDTO.getName())) example.createCriteria()
-                .andLike("name","%" + brandDTO.getName() + "%");
+        if (StringUtil.isNotEmpty(brandDTO.getName())) criteria.andLike("name","%" + brandDTO.getName() + "%");
 
         //查询
         List<BrandEntity> list = brandMapper.selectByExample(example);
@@ -105,6 +119,15 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
     @Transactional
     @Override
     public Result<JsonObject> deleteBrand(Integer id) {
+
+        //品牌被商品绑定,
+        Example example1 = new Example(SpuEntity.class);
+        example1.createCriteria().andEqualTo("brandId",id);
+        List<SpuEntity> list = spuMapper.selectByExample(example1);
+
+        if(list.size() > 0) return this.setResultError("此品牌被商品绑定,不可被删除");
+
+        //品牌删除
         brandMapper.deleteByPrimaryKey(id);
         this.deleteCategoryAndBrand(id);
 
@@ -116,6 +139,7 @@ public class BrandServiceImpl extends BaseApiService implements BrandService {
         Example example = new Example(CategoryBrandEntity.class);
         example.createCriteria().andEqualTo("brandId",id);
         categoryBrandMapper.deleteByExample(example);
+
     }
 
     private void insertCategoryAndBrand(BrandDTO brandDTO,BrandEntity brandEntity) {

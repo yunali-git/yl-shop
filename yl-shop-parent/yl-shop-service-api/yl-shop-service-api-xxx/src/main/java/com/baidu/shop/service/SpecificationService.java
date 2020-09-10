@@ -34,17 +34,17 @@ public interface SpecificationService {
 
     @ApiOperation(value = "查询规格参数")
     @GetMapping(value = "listParam/list")
-    Result<List<SpecParamEntity>> list(SpecParamDTO specParamDTO);
+    Result<List<SpecParamEntity>> listParam(SpecParamDTO specParamDTO);
 
     @ApiOperation(value = "新增规格参数")
     @PostMapping(value = "saveParam/save")
     Result<JSONObject> saveParam(@Validated({MingruiOperation.Add.class}) @RequestBody SpecParamDTO specParamDTO);
 
-    @ApiOperation(value = "新增规格参数")
+    @ApiOperation(value = "修改规格参数")
     @PutMapping(value = "saveParam/save")
     Result<JSONObject> editParam(@Validated({MingruiOperation.Update.class}) @RequestBody SpecParamDTO specParamDTO);
 
-    @ApiOperation(value = "新增规格参数")
+    @ApiOperation(value = "删除规格参数")
     @DeleteMapping(value = "deleteParam/delete")
     Result<JSONObject> deleteParam(Integer id);
 }
