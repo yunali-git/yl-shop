@@ -15,6 +15,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>yl-shop-service-xxx</module>
+        <module>yl-shop-service-search</module>
     </modules>
 
     <dependencies>

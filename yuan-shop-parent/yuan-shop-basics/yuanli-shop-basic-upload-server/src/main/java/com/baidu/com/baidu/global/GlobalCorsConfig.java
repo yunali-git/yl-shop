@@ -24,7 +24,7 @@ public class GlobalCorsConfig {
         config.setMaxAge(18000L);// 预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了
         config.addAllowedMethod("*");// 允许提交请求的方法，*表示全部允许，也可以单独设置GET、PUT等
         config.addAllowedMethod("HEAD");
-        config.addAllowedMethod("GET");// 允许Get的请求方法
+        config.addAllowedMethod("GET");//允许Get的请求方法
         config.addAllowedMethod("PUT");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("DELETE");

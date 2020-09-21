@@ -15,7 +15,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>yl-shop-basic-eureka-server</module>
-        <module>yl-shop-basic-zuul-serer</module>
         <module>yl-shop-basic-zuul-server</module>
         <module>yl-shop-basic-upload-server</module>
     </modules>

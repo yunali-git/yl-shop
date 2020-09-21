@@ -15,6 +15,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>yl-shop-service-api-xxx</module>
+        <module>yl -shop-service-api-search</module>
+        <module>yl-shop-service-api-searchs</module>
     </modules>
 
     <dependencies>
@@ -56,6 +58,17 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.10</version>
+        </dependency>
+
+        <!--2.3版本之后web删除了验证插件-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <!--feign get请求需要使用@SpringQueryMap注解-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
     </dependencies>

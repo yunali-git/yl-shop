@@ -34,6 +34,20 @@ public class JSONUtil {
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();// todo yyyy-MM-dd HH:mm:ss
     }
 
+    public static Map<String, String> toMapValueString(String json) {
+
+        Map<String, String> map = gson.fromJson(json, new TypeToken<Map<String, String>>() {
+        }.getType());
+        return map;
+    }
+
+    public static Map<String, List<String>> toMapValueStrList(String json) {
+
+        Map<String, List<String>> map = gson.fromJson(json, new TypeToken<Map<String, List<String>>>() {}.getType());
+
+        return map;
+    }
+
     public static synchronized Gson newInstance() {
         if (gson == null) {
             gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();

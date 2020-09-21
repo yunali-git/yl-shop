@@ -1,0 +1,15 @@
+server:
+  port: 8300
+
+spring:
+  elasticsearch:
+    rest:
+      uris: 119.45.208.247:9200
+  application:
+    name: search-server
+
+# eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

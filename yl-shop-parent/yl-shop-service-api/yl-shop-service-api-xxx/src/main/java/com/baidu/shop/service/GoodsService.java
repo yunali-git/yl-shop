@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.gson.JsonObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface GoodsService {
 
     @ApiOperation(value = "查询spu信息")
     @GetMapping(value = "goods/getSpuInfo")
-    Result<List<SpuDTO>> getSpuInfo(SpuDTO spuDTO);
+    Result<List<SpuDTO>> getSpuInfo(@SpringQueryMap SpuDTO spuDTO);
 
     @ApiOperation(value = "新增spu信息")
     @PostMapping(value = "goods/spuAdd")
@@ -27,17 +28,17 @@ public interface GoodsService {
 
     @ApiOperation(value = "查询spu信息")
     @GetMapping(value = "goods/getSpuDetailBydSpu")
-    Result<SpuDetailEntity> getSpuDetailBydSpu (Integer spuId);
+    Result<SpuDetailEntity> getSpuDetailBydSpu (@RequestParam Integer spuId);
 
     @ApiOperation(value = "获取sku信息")
     @GetMapping(value = "goods/getSkuBySpuId")
-    Result<List<SkuDTO>> getSkuBySpuId(Integer spuId);
+    Result<List<SkuDTO>> getSkuBySpuId(@RequestParam Integer spuId);
 
     @ApiOperation(value = "修改spu信息")
     @PutMapping(value = "goods/spuAdd")
     Result<JsonObject> spuEdit(@RequestBody SpuDTO spuDTO);
 
-    @ApiOperation(value = "修改spu信息")
+    @ApiOperation(value = "删除spu信息")
     @DeleteMapping(value = "goods/spuDelete")
     Result<JsonObject> spuDelete(Integer spuId);
 

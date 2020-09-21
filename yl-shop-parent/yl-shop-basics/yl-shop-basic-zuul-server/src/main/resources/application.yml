@@ -13,6 +13,9 @@ zuul:
       # 声明将所有以/api-ribbon/的请求都转发到eureka-ribbon的服务中
       path: /api-xxx/**
       serviceId: xxx-service
+    api-search:
+      path: /api-search/**
+      serviceId: search-server
   # 启用重试
   retryable: true
   # 包含此路径的不进行路由

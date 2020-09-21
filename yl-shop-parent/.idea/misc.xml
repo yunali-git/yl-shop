@@ -10,6 +10,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/yl-shop-basics/yl-shop-basic-zuul-serer/pom.xml" />
+        <option value="$PROJECT_DIR$/yl-shop-service-api/yl -shop-service-api-search/pom.xml" />
       </set>
     </option>
   </component>

@@ -52,7 +52,6 @@ public class GoodsServiceImpl extends BaseApiService implements GoodsService {
     @Resource
     private StockMapper stockMapper;
 
-
     @Override
     public Result<List<SpuDTO>> getSpuInfo(SpuDTO spuDTO) {
         //分页

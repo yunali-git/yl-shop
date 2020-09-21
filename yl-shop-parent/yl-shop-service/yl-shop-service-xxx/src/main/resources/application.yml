@@ -8,11 +8,11 @@ spring:
   datasource:
     # 数据源名称，任意
     name: mysql
-    url: jdbc:mysql://119.45.208.247:3306/1909-shop?useSSL=true&nullNamePatternMatchesAll=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/yl?useSSL=true&nullNamePatternMatchesAll=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
     # 数据库连接用户
     username: root
     # 数据库连接密码
-    password: Root.110
+    password: root
     # 驱动名称
     driver-class-name: com.mysql.cj.jdbc.Driver
     # boot2.0+使用hikari作为默认数据库连接池

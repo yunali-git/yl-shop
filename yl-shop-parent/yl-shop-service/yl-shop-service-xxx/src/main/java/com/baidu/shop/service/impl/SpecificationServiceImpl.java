@@ -35,12 +35,12 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
     private SpecParamMapper specParamMapper;
 
     @Override
-    public Result<List<SpecGroupEntity>> getSepcGroup(SpecGroupDTO specGroupDTO) {
+    public Result<List<SpecGroupEntity>> getSepcGroupInfo(SpecGroupDTO specGroupDTO) {
 
+        //通过分类id查询数据
         Example example = new Example(SpecGroupEntity.class);
 
-        if(ObjectUtil.isNotNull(specGroupDTO.getCid()))
-            example.createCriteria().andEqualTo("cid",specGroupDTO.getCid());
+        if(ObjectUtil.isNotNull(specGroupDTO.getCid())) example.createCriteria().andEqualTo("cid",specGroupDTO.getCid());
 
         List<SpecGroupEntity> list = specGroupMapper.selectByExample(example);
         return this.setResultSuccess(list);
@@ -48,15 +48,17 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
 
     @Transactional
     @Override
-    public Result<JSONObject> save(SpecGroupDTO specGroupDTO) {
+    public Result<JSONObject> add(SpecGroupDTO specGroupDTO) {
 
         specGroupMapper.insertSelective(BaiduBeanUtil.copyProperties(specGroupDTO,SpecGroupEntity.class));
 
         return this.setResultSuccess();
     }
+
     @Transactional
     @Override
     public Result<JSONObject> edit(SpecGroupDTO specGroupDTO) {
+
         specGroupMapper.updateByPrimaryKeySelective(BaiduBeanUtil.copyProperties(specGroupDTO,SpecGroupEntity.class));
         return this.setResultSuccess();
     }
@@ -65,23 +67,20 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
     @Override
     public Result<JSONObject> delete(Integer id) {
 
-        Example example = new Example(SpecParamEntity.class);
-        example.createCriteria().andEqualTo("groupId",id);
-
-        List<SpecParamEntity> list = specParamMapper.selectByExample(example);
-
-        if(list.size() > 0 ) return  this.setResultError("此规格绑定参数不能删除");
-
         specGroupMapper.deleteByPrimaryKey(id);
+
         return this.setResultSuccess();
     }
 
     @Override
-    public Result<List<SpecParamEntity>> listParam(SpecParamDTO specParamDTO) {
-        //if(ObjectUtil.isNull(specParamDTO.getGroupId())) return this.setResultError("规格组id不是空");
+    public Result<List<SpecParamEntity>> getSpecParamInfo(SpecParamDTO specParamDTO) {
 
+        //自定义异常
+
+        //if(ObjectUtil.isNull(specParamDTO.getGroupId())) return this.setResultError("规格组id不能为空");
         Example example = new Example(SpecParamEntity.class);
         Example.Criteria criteria = example.createCriteria();
+
         if(ObjectUtil.isNotNull(specParamDTO.getGroupId())){
             criteria.andEqualTo("groupId",specParamDTO.getGroupId());
         }
@@ -91,13 +90,16 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
         }
 
         List<SpecParamEntity> list = specParamMapper.selectByExample(example);
+
         return this.setResultSuccess(list);
     }
 
     @Transactional
     @Override
-    public Result<JSONObject> saveParam(SpecParamDTO specParamDTO) {
+    public Result<JSONObject> addParam(SpecParamDTO specParamDTO) {
+
         specParamMapper.insertSelective(BaiduBeanUtil.copyProperties(specParamDTO,SpecParamEntity.class));
+
         return this.setResultSuccess();
     }
 
@@ -106,14 +108,16 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
     public Result<JSONObject> editParam(SpecParamDTO specParamDTO) {
 
         specParamMapper.updateByPrimaryKeySelective(BaiduBeanUtil.copyProperties(specParamDTO,SpecParamEntity.class));
+
         return this.setResultSuccess();
     }
 
     @Transactional
     @Override
-    public Result<JSONObject> deleteParam(Integer id) {
+    public Result<JSONObject> delParam(Integer id) {
 
         specParamMapper.deleteByPrimaryKey(id);
+
         return this.setResultSuccess();
     }
 }

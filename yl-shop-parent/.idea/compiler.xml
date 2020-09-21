@@ -6,20 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="yl-shop-common-core" />
+        <module name="yl-shop-service-api-searchs" />
+        <module name="yl-shop-service-search" />
         <module name="yl-shop-basic-eureka-server" />
-        <module name="yl-shop-service-xxx" />
         <module name="yl-shop-basic-zuul-server" />
+        <module name="yl-shop-service-xxx" />
+        <module name="yl-shop-common-core" />
         <module name="yl-shop-service-api-xxx" />
         <module name="yl-shop-basic-upload-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="yl -shop-service-api-search" target="1.8" />
       <module name="yl-shop-basic-zuul-serer" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="yl -shop-service-api-search" options="-parameters" />
       <module name="yl-shop-basic-eureka-server" options="-parameters" />
       <module name="yl-shop-basic-upload-server" options="-parameters" />
       <module name="yl-shop-basic-zuul-serer" options="-parameters" />
@@ -29,7 +33,9 @@
       <module name="yl-shop-common-core" options="-parameters" />
       <module name="yl-shop-service" options="-parameters" />
       <module name="yl-shop-service-api" options="-parameters" />
+      <module name="yl-shop-service-api-searchs" options="-parameters" />
       <module name="yl-shop-service-api-xxx" options="-parameters" />
+      <module name="yl-shop-service-search" options="-parameters" />
       <module name="yl-shop-service-xxx" options="-parameters" />
     </option>
   </component>
