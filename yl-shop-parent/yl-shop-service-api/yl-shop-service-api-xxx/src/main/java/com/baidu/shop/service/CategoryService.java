@@ -17,7 +17,7 @@ public interface CategoryService {
 
     @ApiOperation(value = "新增分类")
     @PostMapping(value = "category/add")
-    public Result<JSONObject> addCategory(@RequestBody CategoryEntity categoryEntity);
+    Result<JSONObject> addCategory(@RequestBody CategoryEntity categoryEntity);
 
     @ApiOperation(value = "修改分类")
     @PutMapping(value = "category/edit")
@@ -29,5 +29,9 @@ public interface CategoryService {
 
     @ApiOperation(value = "通过id查询商品分类")
     @GetMapping(value = "category/getBrand")
-    public Result<List<CategoryEntity>> getBrand(Integer brandId);
+    Result<List<CategoryEntity>> getBrand(Integer brandId);
+
+    @ApiOperation(value = "通过分类id集合查询商品分类")
+    @GetMapping(value = "category/getCategoryByIdList")
+    Result<List<CategoryEntity>> getCategoryByIdList(@RequestParam String cidsStr);
 }

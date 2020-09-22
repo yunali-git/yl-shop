@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="yl-shop-service-api-searchs" />
-        <module name="yl-shop-service-search" />
-        <module name="yl-shop-basic-eureka-server" />
-        <module name="yl-shop-basic-zuul-server" />
-        <module name="yl-shop-service-xxx" />
         <module name="yl-shop-common-core" />
+        <module name="yl-shop-basic-eureka-server" />
+        <module name="yl-shop-service-search" />
+        <module name="yl-shop-service-xxx" />
+        <module name="yl-shop-basic-zuul-server" />
         <module name="yl-shop-service-api-xxx" />
         <module name="yl-shop-basic-upload-server" />
       </profile>
