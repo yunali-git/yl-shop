@@ -65,8 +65,13 @@ public class GoodsServiceImpl extends BaseApiService implements GoodsService {
         Example.Criteria criteria = example.createCriteria();
         if(StringUtil.isNotEmpty(spuDTO.getTitle()))
             criteria.andLike("title","%" + spuDTO.getTitle() + "%");
+
         if(ObjectUtil.isNotNull(spuDTO.getSaleable()) && spuDTO.getSaleable() != 2)
-            criteria.andEqualTo("saleable",spuDTO.getSaleable());
+            criteria.andEqualTo("saleable",spuDTO. getSaleable());
+
+        if (ObjectUtil.isNotNull(spuDTO.getId())) {
+            criteria.andEqualTo("id",spuDTO.getId());
+        }
 
         //排序
         if(ObjectUtil.isNotNull(spuDTO.getSort()))

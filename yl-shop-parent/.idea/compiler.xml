@@ -8,8 +8,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="yl-shop-service-api-searchs" />
         <module name="yl-shop-common-core" />
+        <module name="yl-shop-service-template" />
         <module name="yl-shop-basic-eureka-server" />
         <module name="yl-shop-service-search" />
+        <module name="yl-shop-service-api-template" />
         <module name="yl-shop-service-xxx" />
         <module name="yl-shop-basic-zuul-server" />
         <module name="yl-shop-service-api-xxx" />
@@ -34,8 +36,10 @@
       <module name="yl-shop-service" options="-parameters" />
       <module name="yl-shop-service-api" options="-parameters" />
       <module name="yl-shop-service-api-searchs" options="-parameters" />
+      <module name="yl-shop-service-api-template" options="-parameters" />
       <module name="yl-shop-service-api-xxx" options="-parameters" />
       <module name="yl-shop-service-search" options="-parameters" />
+      <module name="yl-shop-service-template" options="-parameters" />
       <module name="yl-shop-service-xxx" options="-parameters" />
     </option>
   </component>

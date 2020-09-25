@@ -17,6 +17,7 @@
         <module>yl-shop-service-api-xxx</module>
         <module>yl -shop-service-api-search</module>
         <module>yl-shop-service-api-searchs</module>
+        <module>yl-shop-service-api-template</module>
     </modules>
 
     <dependencies>

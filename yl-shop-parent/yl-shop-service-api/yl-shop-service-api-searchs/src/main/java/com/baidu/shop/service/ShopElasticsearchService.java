@@ -25,6 +25,6 @@ public interface ShopElasticsearchService {
 
     @ApiOperation(value = "搜索")
     @GetMapping(value = "es/search")
-    GoodsResponse search(@RequestParam String search, Integer page);
+    GoodsResponse search(@RequestParam String search, Integer page,String filter);
 
 }

@@ -1,0 +1,33 @@
+server:
+  port: 8400
+
+spring:
+  application:
+    name: template-server
+  thymeleaf:
+    # 配置前缀-->模板文件存储路径
+    prefix: classpath:/templates/
+    # 是否检查本地模板
+    check-template-location: true
+    # 配置模板文件后缀
+    suffix: .html
+    # 编码格式
+    encoding: UTF-8
+    servlet:
+      # 模板类型
+      content-type: text/html
+    #模板模式
+    mode: HTML5
+    # 是否启用缓存
+    cache: false
+
+mrshop:
+  static:
+    html:
+      path: D:\YL\images\item #生成的html文件存储的路径
+
+# eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

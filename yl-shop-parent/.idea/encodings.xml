@@ -6,8 +6,10 @@
     <file url="file://$PROJECT_DIR$/yl-shop-basics/yl-shop-basic-zuul-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yl-shop-commoms/yl-shop-common-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yl-shop-service-api/yl-shop-service-api-searchs/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yl-shop-service-api/yl-shop-service-api-template/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yl-shop-service-api/yl-shop-service-api-xxx/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yl-shop-service/yl-shop-service-search/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yl-shop-service/yl-shop-service-template/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yl-shop-service/yl-shop-service-xxx/src/main/java" charset="UTF-8" />
   </component>
 </project>
