@@ -18,6 +18,8 @@
         <module>yl -shop-service-api-search</module>
         <module>yl-shop-service-api-searchs</module>
         <module>yl-shop-service-api-template</module>
+        <module>yl-shop-service-api-user</module>
+        <module>yl-shop-service-api-car</module>
     </modules>
 
     <dependencies>

@@ -17,6 +17,8 @@
         <module>yl-shop-service-xxx</module>
         <module>yl-shop-service-search</module>
         <module>yl-shop-service-template</module>
+        <module>yl-shop-service-user</module>
+        <module>yl-shop-service-car</module>
     </modules>
 
     <dependencies>

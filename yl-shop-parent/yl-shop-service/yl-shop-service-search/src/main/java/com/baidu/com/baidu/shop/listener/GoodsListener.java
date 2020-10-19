@@ -49,4 +49,28 @@ public class GoodsListener {
         shopElasticsearchService.saveData(Integer.parseInt(new String(message.getBody())));
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
     }
+
+    @RabbitListener(
+            bindings = @QueueBinding(
+                    value = @Queue(
+                            value = MqMessageConstant.SPU_QUEUE_SEARCH_DELETE,
+                            durable = "true"
+                    ),
+                    exchange = @Exchange(
+                            value = MqMessageConstant.EXCHANGE,
+                            ignoreDeclarationExceptions = "true",
+                            type = ExchangeTypes.TOPIC
+                    ),
+                    key = MqMessageConstant.SPU_ROUT_KEY_DELETE
+            )
+    )
+    public void delete(Message message, Channel channel) throws IOException {
+
+        log.info("es服务接受到需要删除数据的消息: " + new String(message.getBody()));
+        //新增数据到es
+        shopElasticsearchService.delData(Integer.parseInt(new String(message.getBody())));
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
+    }
+
+
 }

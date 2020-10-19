@@ -17,6 +17,7 @@
         <module>yl-shop-basic-eureka-server</module>
         <module>yl-shop-basic-zuul-server</module>
         <module>yl-shop-basic-upload-server</module>
+        <module>yl-shop-basic-user-oauth</module>
     </modules>
 
 </project>

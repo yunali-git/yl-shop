@@ -212,16 +212,16 @@
                             <div class="fl title">
                                 <div class="control-group">
                                     <div class="controls">
-                                        <input autocomplete="off" type="text" disabled value="1" minnum="1" class="itxt" />
-                                        <a href="javascript:void(0)" class="increment plus">+</a>
-                                        <a href="javascript:void(0)" class="increment mins">-</a>
+                                        <input autocomplete="off" type="text" disabled value="1" v-model="num" minnum="1" class="itxt" />
+                                        <a href="javascript:void(0)" class="increment plus" @click="increment">+</a>
+                                        <a href="javascript:void(0)" class="increment mins" @click="decrement">-</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="fl">
                                 <ul class="btn-choose unstyled">
                                     <li>
-                                        <a href="success-cart.html" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+                                        <a href="/success-cart.html" @click.prevent="addCar" class="sui-btn  btn-danger addshopcar">加入购物车</a>
                                     </li>
                                 </ul>
                             </div>
@@ -660,14 +660,73 @@
             indexes,
             genSpec,
             specGroupDTOList,
-            mrshop
+            mrshop,
+            num:1
+        },
+        methods:{
+          increment (){
+            if(this.num < this.sku.stock) this.num++;
+          },
+          decrement (){
+            if(this.num >1) this.num--;
+          },
+          addCar (){
+              //效验用户是否登录
+              mrshop.checkUserLogin().then(resp => {
+                  mrshop.http.post('car/car/addCar',{
+                      skuId:this.sku.id,
+                      // title:this.sku.title,
+                      // image:this.images.length > 0 ? this.images[0] : '',
+                      // price:this.sku.price,
+                      num:this.num,
+                      // ownSpec:JSON.stringify(this.ownSpec)
+                  }).then(resp =>{
+
+                  }).catch(error => console.log(error))
+              }).catch(() => {
+
+                  return ;
+                  //从localstorage中获取购物车数据 || 如果没有获取到数据,直接返回空的数组
+                  const carList = mrshop.store.get("carList") || [];
+
+                  //判断当前将要加入到购物车中的数据是否在购物车中
+                  let car = carList.find(car => car.skuId == this.sku.id);
+
+                  if(car){//存在
+                      //原来的数量加上当前设置的num数量
+                      car.num += this.num;
+                  }else{//不存在
+                      //将商品新增到购物车
+                      car = {
+                          skuId:this.sku.id,
+                          title:this.sku.title,
+                          image:this.images.length > 0 ? this.images[0] : '',
+                          price:this.sku.price,
+                          num:this.num,
+                          ownSpec:JSON.stringify(this.ownSpec)
+                      };
+                      carList.push(car);
+                  }
+                  mrshop.store.set("carList",carList);
+                  window.location.href = '../success-cart.html';
+              });
+          }
         },
         computed:{
+            ownSpec () {
+                //获取当前商品特殊规格数据(4:机身颜色....)
+                const ownSpec = JSON.parse(this.sku.ownSpec);
+                const obj = {};
+                //遍历特有规格的id(4,5,6)
+                Object.keys(ownSpec).forEach(key => {
+                    //通过特有规格id找到对应的特有规格名称 = 特有规格的值
+                    obj[this.specParamMap[key]] = ownSpec[key];
+                });
+                return obj;
+            },
             sku(){
-
                 //skus-->数组 通过0_0_0
                 const index = Object.values(this.indexes).join("_");
-
                 return this.skus.find(sku => sku.indexes == index);
             },
             images(){

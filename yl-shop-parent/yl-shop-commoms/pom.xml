@@ -15,6 +15,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>yl-shop-common-core</module>
+        <module>yl-shop-common-oauth</module>
     </modules>
 
 </project>
