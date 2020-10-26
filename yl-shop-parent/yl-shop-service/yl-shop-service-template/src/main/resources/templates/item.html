@@ -675,28 +675,21 @@
               mrshop.checkUserLogin().then(resp => {
                   mrshop.http.post('car/car/addCar',{
                       skuId:this.sku.id,
-                      // title:this.sku.title,
-                      // image:this.images.length > 0 ? this.images[0] : '',
-                      // price:this.sku.price,
+                      title:this.sku.title,
                       num:this.num,
-                      // ownSpec:JSON.stringify(this.ownSpec)
                   }).then(resp =>{
-
+                      console.log(resp.data.data)
+                      if(resp.data.code == 200){
+                          window.location.href = '../success-cart.html';
+                      }
                   }).catch(error => console.log(error))
               }).catch(() => {
+                  let carList = mrshop.store.get(mrshop.CLIENT_CAR_LIST) || [];
+                  let car = carList.find(sku => sku.skuId == this.sku.id);
 
-                  return ;
-                  //从localstorage中获取购物车数据 || 如果没有获取到数据,直接返回空的数组
-                  const carList = mrshop.store.get("carList") || [];
-
-                  //判断当前将要加入到购物车中的数据是否在购物车中
-                  let car = carList.find(car => car.skuId == this.sku.id);
-
-                  if(car){//存在
-                      //原来的数量加上当前设置的num数量
+                  if(car){
                       car.num += this.num;
-                  }else{//不存在
-                      //将商品新增到购物车
+                  }else{
                       car = {
                           skuId:this.sku.id,
                           title:this.sku.title,
@@ -704,28 +697,27 @@
                           price:this.sku.price,
                           num:this.num,
                           ownSpec:JSON.stringify(this.ownSpec)
-                      };
+                      }
                       carList.push(car);
                   }
-                  mrshop.store.set("carList",carList);
+
+                  mrshop.store.set(mrshop.CLIENT_CAR_LIST,carList);
                   window.location.href = '../success-cart.html';
               });
           }
         },
         computed:{
             ownSpec () {
-                //获取当前商品特殊规格数据(4:机身颜色....)
+                //获取商品特殊规格数据
                 const ownSpec = JSON.parse(this.sku.ownSpec);
                 const obj = {};
-                //遍历特有规格的id(4,5,6)
+                //遍历特有规格的id
                 Object.keys(ownSpec).forEach(key => {
-                    //通过特有规格id找到对应的特有规格名称 = 特有规格的值
                     obj[this.specParamMap[key]] = ownSpec[key];
                 });
                 return obj;
             },
             sku(){
-                //skus-->数组 通过0_0_0
                 const index = Object.values(this.indexes).join("_");
                 return this.skus.find(sku => sku.indexes == index);
             },

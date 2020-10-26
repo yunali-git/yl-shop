@@ -3,6 +3,7 @@ package com.baidu.shop.service;
 import com.baidu.shop.base.Result;
 import com.baidu.shop.dto.SkuDTO;
 import com.baidu.shop.dto.SpuDTO;
+import com.baidu.shop.entity.SkuEntity;
 import com.baidu.shop.entity.SpuDetailEntity;
 import com.baidu.shop.entity.SpuEntity;
 import com.github.pagehelper.PageInfo;
@@ -45,5 +46,9 @@ public interface GoodsService {
     @ApiOperation(value = "修改上下架的状态")
     @PutMapping(value = "goods/upOrDown")
     Result<JsonObject> upOrDownEdit(@RequestBody SpuDTO spuDTO);
+
+    @ApiOperation(value = "通过skuId查询sku信息")
+    @GetMapping(value = "goods/getSkuBySkuId")
+    Result<SkuEntity> getSkuBySkuId(@RequestParam Long skuId);
 
 }

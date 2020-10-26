@@ -1,4 +1,4 @@
-package com.baidu.com.baidu.shop.feign;
+package com.baidu.shop.feign;
 
 import com.baidu.shop.service.GoodsService;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -15,11 +15,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>yl-shop-service-api-xxx</module>
-        <module>yl -shop-service-api-search</module>
         <module>yl-shop-service-api-searchs</module>
         <module>yl-shop-service-api-template</module>
         <module>yl-shop-service-api-user</module>
         <module>yl-shop-service-api-car</module>
+        <module>yl-shop-service-api-order</module>
+        <module>yl-shop-service-api-pay</module>
     </modules>
 
     <dependencies>

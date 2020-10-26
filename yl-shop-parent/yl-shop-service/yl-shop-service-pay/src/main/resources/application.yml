@@ -1,0 +1,25 @@
+server:
+  port: 8900
+
+spring:
+  application:
+    name: pay-server
+
+#日志设置
+logging:
+  level:
+    # 打印与我们程序相关的日志信息
+    com.baidu.shop: debug
+# eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+mrshop:
+  worker:
+    workerId: 1 # 项目唯一标识
+    datacenterId: 1 # 序列号 其实也是唯一标识
+  jwt:
+    pubKeyPath: D:\YL\secret\rea.pub # 公钥地址
+    cookieName: MRSHOP_TOKEN # cookie的名称

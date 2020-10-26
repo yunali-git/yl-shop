@@ -58,6 +58,14 @@ public class GoodsServiceImpl extends BaseApiService implements GoodsService {
     private MrRabbitMQ mrRabbitMQ;
 
     @Override
+    public Result<SkuEntity> getSkuBySkuId(Long skuId) {
+
+        SkuEntity skuEntity = skuMapper.selectByPrimaryKey(skuId);
+
+        return this.setResultSuccess(skuEntity);
+    }
+
+    @Override
     public Result<List<SpuDTO>> getSpuInfo(SpuDTO spuDTO) {
         //分页
         if(ObjectUtil.isNotNull(spuDTO.getPage())

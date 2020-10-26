@@ -9,15 +9,19 @@
         <module name="yl-shop-service-api-car" />
         <module name="yl-shop-common-oauth" />
         <module name="yl-shop-basic-upload-server" />
+        <module name="yl-shop-service-api-order" />
         <module name="yl-shop-common-core" />
         <module name="yl-shop-basic-zuul-server" />
         <module name="yl-shop-service-xxx" />
+        <module name="yl-shop-service-api-pay" />
         <module name="yl-shop-service-api-template" />
         <module name="yl-shop-service-car" />
         <module name="yl-shop-service-template" />
         <module name="yl-shop-service-api-searchs" />
         <module name="yl-shop-service-api-user" />
+        <module name="yl-shop-service-order" />
         <module name="yl-shop-service-search" />
+        <module name="yl-shop-service-pay" />
         <module name="yl-shop-service-api-xxx" />
         <module name="yl-shop-service-user" />
         <module name="yl-shop-basic-user-oauth" />
@@ -44,11 +48,15 @@
       <module name="yl-shop-service" options="-parameters" />
       <module name="yl-shop-service-api" options="-parameters" />
       <module name="yl-shop-service-api-car" options="-parameters" />
+      <module name="yl-shop-service-api-order" options="-parameters" />
+      <module name="yl-shop-service-api-pay" options="-parameters" />
       <module name="yl-shop-service-api-searchs" options="-parameters" />
       <module name="yl-shop-service-api-template" options="-parameters" />
       <module name="yl-shop-service-api-user" options="-parameters" />
       <module name="yl-shop-service-api-xxx" options="-parameters" />
       <module name="yl-shop-service-car" options="-parameters" />
+      <module name="yl-shop-service-order" options="-parameters" />
+      <module name="yl-shop-service-pay" options="-parameters" />
       <module name="yl-shop-service-search" options="-parameters" />
       <module name="yl-shop-service-template" options="-parameters" />
       <module name="yl-shop-service-user" options="-parameters" />

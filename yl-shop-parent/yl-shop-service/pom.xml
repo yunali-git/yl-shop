@@ -19,6 +19,8 @@
         <module>yl-shop-service-template</module>
         <module>yl-shop-service-user</module>
         <module>yl-shop-service-car</module>
+        <module>yl-shop-service-order</module>
+        <module>yl-shop-service-pay</module>
     </modules>
 
     <dependencies>
